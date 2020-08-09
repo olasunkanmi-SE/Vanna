@@ -1,6 +1,7 @@
+import { RootStoreModule } from './root-store/root-store.module';
 import { CoreModule } from './core/core.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { NgModule, Injectable } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,8 @@ export class MyHAmmerConfig extends HammerGestureConfig {
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    RootStoreModule,
+    HammerModule,
   ],
   providers: [
     {
