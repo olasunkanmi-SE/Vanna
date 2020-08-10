@@ -21,4 +21,4 @@ export class LoadVideosFailure implements Action {
   constructor(public payload: string) {}
 }
 
-export type VideoActions = LoadVideos | LoadVideosSuccess | LoadVideosFailure;
+export type VideoAction = LoadVideos | LoadVideosSuccess | LoadVideosFailure;
