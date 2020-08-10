@@ -22,7 +22,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const { url, method } = request;
-    if (url.endsWith('/fake') || url.endsWith('/signup')) {
+    if (url.endsWith('/fakeurl')) {
       return of(null)
         .pipe(mergeMap(handleRoute))
         .pipe(materialize())

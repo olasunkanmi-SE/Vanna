@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { RootStoreModule } from './root-store/root-store.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
@@ -27,6 +28,7 @@ export class MyHAmmerConfig extends HammerGestureConfig {
     CoreModule,
     RootStoreModule,
     HammerModule,
+    HttpClientModule,
   ],
   providers: [
     {

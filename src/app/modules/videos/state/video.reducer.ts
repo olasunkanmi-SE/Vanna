@@ -1,23 +1,37 @@
 import { Video } from './../model/video';
 import * as videoActions from './video.actions';
-export interface videoState {
+
+/**
+ * Define the video State
+ */
+export interface VideoState {
   videos: Video[];
   loading: boolean;
   loaded: boolean;
   error: string;
 }
 
-export const initialState: videoState = {
+/**
+ * Define the video initial state
+ */
+
+export const initialState: VideoState = {
   videos: [],
   loading: false,
   loaded: false,
   error: '',
 };
 
+/**
+ * create the video reducer
+ * @params initialstate,Video Action
+ * @return Videotate
+ */
+
 export function videoReducer(
   state = initialState,
   action: videoActions.VideoAction
-): videoState {
+): VideoState {
   switch (action.type) {
     case videoActions.VideoActionTypes.LOAD_VIDEOS:
       return {

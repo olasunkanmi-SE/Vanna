@@ -8,13 +8,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [],
   imports: [CommonModule, MaterialModule],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: FakeBackendInterceptor,
-      multi: true,
-    },
-  ],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
