@@ -6,7 +6,7 @@ import { Action } from '@ngrx/store';
  */
 
 export enum VideoActionTypes {
-  LOAD_VIDEOS = '[VIdeo] Load Videos',
+  LOAD_VIDEOS = '[Video] Load Videos',
   LOAD_VIDEOS_SUCCESS = '[Video] Load Videos Success',
   LOAD_VIDEOS_FAILURE = '[Video] Load Videos Failure',
 }
