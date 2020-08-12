@@ -30,7 +30,10 @@ export const reducers: ActionReducerMap<State> = {
 export const getVideoState = createFeatureSelector<fromVideo.VideoState>(
   'video'
 );
-export const getCustomers = createSelector(getVideoState, fromVideo.getVideos);
+export const getVideos = createSelector(
+  getVideoState,
+  fromVideo.videoAdaptor.getSelectors().selectAll
+);
 export const getIsLoading = createSelector(
   getVideoState,
   fromVideo.getVideosLoading

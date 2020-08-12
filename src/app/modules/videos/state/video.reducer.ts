@@ -1,26 +1,41 @@
 import { Video } from './../model/video';
 import * as videoActions from './video.actions';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 /**
  * Define the video State
  */
-export interface VideoState {
-  videos: Video[];
+export interface VideoState extends EntityState<Video> {
+  selectedVideoId: number | null;
   loading: boolean;
   loaded: boolean;
   error: string;
 }
 
 /**
- * Define the video initial state
+ * Create an instance of the entity adaptor which returns the video type
  */
 
-export const initialState: VideoState = {
-  videos: [],
+export const videoAdaptor: EntityAdapter<Video> = createEntityAdapter<Video>();
+
+/**
+ * Define default customer with some initial value
+ */
+
+export const defaultVideo: VideoState = {
+  ids: [],
+  entities: {},
+  selectedVideoId: null,
   loading: false,
   loaded: false,
   error: '',
 };
+
+/**
+ * Define the video initial state
+ */
+
+export const initialState = videoAdaptor.getInitialState(defaultVideo);
 
 /**
  * create the video reducer
@@ -39,16 +54,15 @@ export function videoReducer(
         loading: true,
       };
     case videoActions.VideoActionTypes.LOAD_VIDEOS_SUCCESS:
-      return {
+      return videoAdaptor.addAll(action.payload, {
         ...state,
         loading: false,
         loaded: true,
-        videos: action.payload,
-      };
+      });
     case videoActions.VideoActionTypes.LOAD_VIDEOS_FAILURE:
       return {
         ...state,
-        videos: [],
+        entities: {},
         loading: false,
         loaded: false,
         error: action.payload,
@@ -59,7 +73,7 @@ export function videoReducer(
   }
 }
 
-export const getVideos = (state: VideoState) => state.videos;
+export const getVideos = (state: VideoState) => state.selectedVideoId;
 export const getVideosLoading = (state: VideoState) => state.loading;
 export const getVideosLoaded = (state: VideoState) => state.loaded;
 export const getError = (state: VideoState) => state.error;
