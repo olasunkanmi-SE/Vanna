@@ -1,27 +1,31 @@
-.cardsposition {
-  max-width: 400px;
-  margin: 0 auto;
-  position: relative;
+.video-cards {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-.cardchildren {
+.video-card {
+  display: inline-block;
+  width: 400px;
+  height: 80%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
   position: absolute;
-  left: 0;
-  right: 0;
+  transition: all 0.3s ease-in-out;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
 }
 
-@media (min-width: 768px) {
-  .col-md-4 {
-    max-width: 100% !important;
-  }
-}
-
-.container,
-.container-fluid,
-.container-sm,
-.container-md,
-.container-lg,
-.container-xl {
-  padding-right: 0px !important;
-  padding-left: 0px !important;
+.content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
