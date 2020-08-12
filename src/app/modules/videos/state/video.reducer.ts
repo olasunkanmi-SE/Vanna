@@ -58,3 +58,8 @@ export function videoReducer(
     }
   }
 }
+
+export const getVideos = (state: VideoState) => state.videos;
+export const getVideosLoading = (state: VideoState) => state.loading;
+export const getVideosLoaded = (state: VideoState) => state.loaded;
+export const getError = (state: VideoState) => state.error;

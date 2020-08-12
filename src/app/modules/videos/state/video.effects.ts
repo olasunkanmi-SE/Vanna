@@ -1,25 +1,30 @@
 import { Video } from './../model/video';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, catchError, exhaustMap } from 'rxjs/operators';
 import * as videoActions from './video.actions';
-import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { VideoService } from './../service/video.service';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
+import { Injectable } from '@angular/core';
 
-export class CustomerEffect {
+@Injectable()
+export class VideoEffect {
   constructor(private actions$: Actions, private videoService: VideoService) {}
-  @Effect()
 
   /**
-   * Subscribe to to videos observables with ngRx Effect
+   * Use create effects to load simulate the video actions
    * @return the videos observable or return an error
    */
-  LoadVideos$: Observable<Action> = this.actions$.pipe(
-    ofType<videoActions.LoadVideos>(videoActions.VideoActionTypes.LOAD_VIDEOS),
-    mergeMap((actions: videoActions.LoadVideos) =>
-      this.videoService.getVideos().pipe(
-        map((videos: Video[]) => new videoActions.LoadVideosSuccess(videos)),
-        catchError((err) => of(new videoActions.LoadVideosFailure(err)))
+  @Effect()
+  LoadVideos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<videoActions.LoadVideos>(
+        videoActions.VideoActionTypes.LOAD_VIDEOS
+      ),
+      exhaustMap((actions: videoActions.LoadVideos) =>
+        this.videoService.getVideos().pipe(
+          map((videos: Video[]) => new videoActions.LoadVideosSuccess(videos)),
+          catchError((err) => of(new videoActions.LoadVideosFailure(err)))
+        )
       )
     )
   );
