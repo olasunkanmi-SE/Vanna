@@ -1,3 +1,20 @@
 <!-- <div (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">
   <app-video-page></app-video-page>
 </div> -->
+
+<section>
+  <div class="container">
+    <div class="row" class="cardsposition">
+      <div
+        class="cardchildren"
+        *ngFor="let video of videos$ | async"
+        class="col-md-4 mb-3"
+      >
+        <mat-card class="example-card">
+          <mat-card-header> </mat-card-header>
+          <img mat-card-image src="{{ video.src }}" alt="" />
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

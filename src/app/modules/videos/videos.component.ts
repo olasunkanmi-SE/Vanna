@@ -1,4 +1,9 @@
+import { Observable } from 'rxjs';
+import { Video } from './model/video';
 import { Component, OnInit } from '@angular/core';
+import * as fromRoot from '../../root-store/state';
+import * as VIDEO from '../videos/state/video.actions';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-videos',
@@ -6,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./videos.component.scss'],
 })
 export class VideosComponent implements OnInit {
-  constructor() {}
+  videos$: Observable<Video[]>;
+  constructor(private store: Store<fromRoot.State>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(new VIDEO.LoadVideos());
+    this.videos$ = this.store.pipe(select(fromRoot.getCustomers));
+  }
 }
