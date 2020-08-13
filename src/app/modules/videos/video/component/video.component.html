@@ -1,3 +1,14 @@
-<mat-card class="example-card">
+<!-- <mat-card class="example-card">
   <img mat-card-image src="{{ video.src }}" alt="" />
-</mat-card>
+</mat-card> -->
+
+<div>
+  <video
+    controls
+    autoplay="autoplay"
+    (click)="toggleVideo()"
+    class="video"
+    src="{{ video.src }}"
+    type="video/mp4"
+  ></video>
+</div>
