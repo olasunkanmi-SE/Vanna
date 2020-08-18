@@ -12,16 +12,16 @@
 
 .video-card {
   display: inline-block;
-  width: 400px;
-  height: 80%;
+  width: 800px;
+  height: 100%;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
   position: absolute;
   transition: all 0.3s ease-in-out;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab;
+  // cursor: -webkit-grab;
+  // cursor: -moz-grab;
+  // cursor: grab;
 }
 
 .content-center {

@@ -43,3 +43,9 @@ export const getIsLoaded = createSelector(
   fromVideo.getVideosLoaded
 );
 export const getError = createSelector(getVideoState, fromVideo.getError);
+
+export const getCurrentVideo = createSelector(
+  getVideoState,
+  fromVideo.getCurrentVideoId,
+  (state) => state.entities[state.selectedVideoId]
+);

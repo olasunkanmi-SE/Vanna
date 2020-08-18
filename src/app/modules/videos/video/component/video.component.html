@@ -1,1 +1,17 @@
-<p>video works!</p>
+<!-- <mat-card class="example-card">
+  <img mat-card-image src="{{ video.src }}" alt="" />
+</mat-card> -->
+
+<div
+  [@cardAnimator]="animationState"
+  (@cardAnimator.done)="resetAnimationState()"
+  (swipeup)="startAnimation('slideOutUp')"
+  (swipedown)="startAnimation('slideOutDown')"
+>
+  <video
+    autoplay="autoplay"
+    class="video"
+    src="{{ video.src }}"
+    type="video/mp4"
+  ></video>
+</div>

@@ -14,10 +14,19 @@ export class VideoService {
 
   /**
    * Get all videos
-   * @return a video array Observable
+   * @return a videos array Observable
    */
 
   getVideos(): Observable<Video[]> {
     return this.http.get<Video[]>(`${this.APIUrl}/videos`);
+  }
+
+  /**
+   * Get video by Id
+   * @return a video Observable
+   */
+
+  getVideoById(payload: number): Observable<Video> {
+    return this.http.get<Video>(`${this.APIUrl}/videos/${payload}`);
   }
 }

@@ -48,11 +48,12 @@ export function videoReducer(
   action: videoActions.VideoAction
 ): VideoState {
   switch (action.type) {
-    case videoActions.VideoActionTypes.LOAD_VIDEOS:
-      return {
-        ...state,
-        loading: true,
-      };
+    //Effect takes care of the initial loading of the state.
+    // case videoActions.VideoActionTypes.LOAD_VIDEOS:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
     case videoActions.VideoActionTypes.LOAD_VIDEOS_SUCCESS:
       return videoAdaptor.addAll(action.payload, {
         ...state,
@@ -67,13 +68,25 @@ export function videoReducer(
         loaded: false,
         error: action.payload,
       };
+
+    case videoActions.VideoActionTypes.LOAD_VIDEO_SUCCESS:
+      return videoAdaptor.addOne(action.payload, {
+        ...state,
+        selectedVideoId: +action.payload.id,
+      });
+
+    case videoActions.VideoActionTypes.LOAD_VIDEO_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
     default: {
       return state;
     }
   }
 }
 
-export const getVideos = (state: VideoState) => state.selectedVideoId;
+export const getCurrentVideoId = (state: VideoState) => state.selectedVideoId;
 export const getVideosLoading = (state: VideoState) => state.loading;
 export const getVideosLoaded = (state: VideoState) => state.loaded;
 export const getError = (state: VideoState) => state.error;
