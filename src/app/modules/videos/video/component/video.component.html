@@ -2,11 +2,14 @@
   <img mat-card-image src="{{ video.src }}" alt="" />
 </mat-card> -->
 
-<div>
+<div
+  [@cardAnimator]="animationState"
+  (@cardAnimator.done)="resetAnimationState()"
+  (swipeup)="startAnimation('slideOutUp')"
+  (swipedown)="startAnimation('slideOutDown')"
+>
   <video
-    controls
     autoplay="autoplay"
-    (click)="toggleVideo()"
     class="video"
     src="{{ video.src }}"
     type="video/mp4"
