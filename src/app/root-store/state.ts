@@ -1,4 +1,5 @@
 import * as fromVideo from './../modules/videos/state/video.reducer';
+import * as fromSwipe from './reducers/swipe.reducer';
 import {
   ActionReducerMap,
   createFeatureSelector,
@@ -11,6 +12,7 @@ import {
 
 export interface State {
   video: fromVideo.VideoState;
+  swipe: fromSwipe.swipeState;
 }
 
 /**
@@ -20,6 +22,7 @@ export interface State {
 
 export const reducers: ActionReducerMap<State> = {
   video: fromVideo.videoReducer,
+  swipe: fromSwipe.SwipeReducer,
 };
 
 /**

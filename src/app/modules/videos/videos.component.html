@@ -5,11 +5,16 @@
         *ngFor="let video of videos$ | async; let i = index"
         class="col-md-4 mb-3 video-card content-center"
         [ngStyle]="{
-          zIndex: videosLength - i,
-          transform: 'scale(' + (20 - i) / 20 + ') translate(-' + 20 * i + 'px)'
+          zIndex: videosLength - i
         }"
       >
-        <app-video [video]="video"></app-video>
+        <app-video
+          [@cardAnimator]="animationState"
+          (@cardAnimator.done)="resetAnimationState()"
+          (swipeup)="startAnimation('slideOutUp', i)"
+          (swipedown)="startAnimation('slideOutDown', i)"
+          [video]="video"
+        ></app-video>
       </div>
     </div>
   </div>
