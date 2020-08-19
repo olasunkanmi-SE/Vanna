@@ -39,31 +39,6 @@ export class VideosComponent implements OnInit {
       .subscribe((res) => (this.videosLength = res.length));
   }
 
-  startAnimation(state, currentIndex) {
-    this.currentVideo = currentIndex;
-    this.animationState ? this.animationState : (this.animationState = state);
-    if (currentIndex > this.videosLength || currentIndex < 0) {
-      return;
-    }
-    let nextIndex = 0;
-    if (state) {
-      if (state === 'slideOutUp') {
-        const isLast = currentIndex === this.videosLength - 1;
-        nextIndex = isLast ? 0 : currentIndex + 1;
-        console.log(nextIndex);
-      }
-      if (state === 'slideOutDown') {
-        console.log('down');
-        const isFirst = currentIndex === 0;
-        nextIndex = isFirst ? this.videosLength - 1 : currentIndex - 1;
-      }
-    }
-  }
-
-  resetAnimationState() {
-    this.animationState = '';
-  }
-
   ngOnDestroy(): void {
     this.VideoSub.unsubscribe();
   }

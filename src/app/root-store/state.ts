@@ -52,3 +52,16 @@ export const getCurrentVideo = createSelector(
   fromVideo.getCurrentVideoId,
   (state) => state.entities[state.selectedVideoId]
 );
+
+/**
+ * create selectors to select slices of the swipe state
+ * @return void
+ */
+
+export const getswipeState = createFeatureSelector<fromSwipe.swipeState>(
+  'swipe'
+);
+export const getCurrentIndex = createSelector(
+  getswipeState,
+  fromSwipe.getCurrentIndex
+);

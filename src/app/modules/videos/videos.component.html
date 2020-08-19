@@ -8,13 +8,7 @@
           zIndex: videosLength - i
         }"
       >
-        <app-video
-          [@cardAnimator]="animationState"
-          (@cardAnimator.done)="resetAnimationState()"
-          (swipeup)="startAnimation('slideOutUp', i)"
-          (swipedown)="startAnimation('slideOutDown', i)"
-          [video]="video"
-        ></app-video>
+        <app-video [video]="video"></app-video>
       </div>
     </div>
   </div>
