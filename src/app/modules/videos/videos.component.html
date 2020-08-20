@@ -2,14 +2,13 @@
   <div class="justify-content:center">
     <div class="row" class="video-cards">
       <div
-        *ngFor="let video of videos$ | async; let i = index"
+        (swipeup)="swipeUp()"
+        (swipedown)="swipeDown()"
+        *ngFor="let video of videos"
         class="col-md-4 mb-3 video-card content-center"
-        [ngStyle]="{
-          zIndex: videosLength - i,
-          transform: 'scale(' + (20 - i) / 20 + ') translate(-' + 20 * i + 'px)'
-        }"
+        [ngStyle]="{}"
       >
-        <app-video [video]="video"></app-video>
+        <app-video [video]="videos[currentIndex]"></app-video
       </div>
     </div>
   </div>

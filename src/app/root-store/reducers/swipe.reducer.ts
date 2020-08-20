@@ -1,11 +1,34 @@
 import { SwipeActions } from '../actions/swipe.actions';
 
-export interface State {
+/**
+ * Define swipe state
+ */
+export interface swipeState {
   currentIndex: number;
 }
 
-const intialState: State = {
+/**
+ * Create the the initial state
+ */
+
+const intialState: swipeState = {
   currentIndex: 0,
 };
 
-export function SwipeReducer(state = intialState, action: SwipeActions) {}
+/**
+ * define the swipe reducer
+ */
+
+export function SwipeReducer(state = intialState, action: SwipeActions) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
+
+/**
+ * define a getter for the current index
+ */
+
+export const getCurrentIndex = (state: swipeState): number =>
+  state.currentIndex;
