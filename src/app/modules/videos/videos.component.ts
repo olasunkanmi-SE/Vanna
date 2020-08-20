@@ -12,6 +12,9 @@ import * as SWIPE from '../../root-store/actions/swipe.actions';
   selector: 'app-videos',
   templateUrl: './videos.component.html',
   styleUrls: ['./videos.component.scss'],
+  /**
+   * Create swiping animations with keyframes
+   */
   animations: [
     trigger('cardAnimator', [
       transition(
@@ -26,6 +29,7 @@ import * as SWIPE from '../../root-store/actions/swipe.actions';
 })
 export class VideosComponent implements OnInit {
   videos$: Observable<any>;
+  videos;
   videosLength: number;
   VideoSub: Subscription;
   animationState: string;
@@ -41,16 +45,27 @@ export class VideosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    /**
+     * Fetch all videos and subscribe to it
+     */
     this.store.dispatch(new VIDEO.LoadVideos());
     this.videos$ = this.store.pipe(select(fromRoot.getVideos));
-    this.VideoSub = this.videos$
-      .pipe()
-      .subscribe((res) => (this.videosLength = res.length));
+    this.VideoSub = this.videos$.pipe().subscribe((res) => {
+      this.videosLength = res.length;
+      this.videos = res;
+    });
+    /**
+     * Fetch the current video index from the store
+     */
 
     this.currentIndex$ = this.store.pipe(select(fromRoot.getCurrentIndex));
     this.IndexSubscription = this.currentIndex$.subscribe(
       (res) => (this.currentIndex = res)
     );
+
+    /**
+     *change videos based on user actions of swiping left or right
+     */
 
     this.actionsSubject
       .pipe(
@@ -64,9 +79,16 @@ export class VideosComponent implements OnInit {
       )
       .subscribe((action) => {
         if (action.type === SWIPE.SwipeActionTypes.swipeUp) {
+          this.nextVideo();
+        } else if (action.type === SWIPE.SwipeActionTypes.swipeDown) {
+          this.previousVideo();
         }
       });
   }
+
+  /**
+   * fetch the next video
+   */
 
   nextVideo() {
     if (this.currentIndex < this.videosLength - 1) {
@@ -76,6 +98,10 @@ export class VideosComponent implements OnInit {
     }
   }
 
+  /**
+   * fetch the previous video
+   */
+
   previousVideo() {
     if (this.currentIndex > 0) {
       this.currentIndex++;
@@ -83,6 +109,18 @@ export class VideosComponent implements OnInit {
       this.currentIndex = this.videosLength - 1;
     }
   }
+
+  swipeUp() {
+    this.store.dispatch(new SWIPE.SwipeUp());
+  }
+
+  swipeDown() {
+    this.store.dispatch(new SWIPE.SwipeDown());
+  }
+
+  /**
+   * Unsubscribe after the page is destroyed
+   */
 
   ngOnDestroy(): void {
     this.VideoSub.unsubscribe();

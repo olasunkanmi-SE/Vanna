@@ -11,7 +11,7 @@
       "id": "2",
       "name": "product 2",
       "description": "99",
-      "src": "assets/videos/Customizing.mp4",
+      "src": "assets/videos/closeup.mp4",
       "type": "video/mp4"
     },
     {
@@ -19,6 +19,13 @@
       "name": "product 3",
       "description": "129",
       "src": "assets/videos/new-zealand.mp4",
+      "type": "video/mp4"
+    },
+    {
+      "id": "4",
+      "name": "product 4",
+      "description": "129",
+      "src": "assets/videos/coffee.mp4",
       "type": "video/mp4"
     }
   ]
