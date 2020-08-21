@@ -93,7 +93,6 @@ export class VideosComponent implements OnInit {
 
   nextVideo() {
     // this.startAnimation('slideOutUp');
-
     if (this.currentIndex < this.videosLength - 1) {
       this.currentIndex++;
     } else {
