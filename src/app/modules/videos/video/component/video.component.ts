@@ -1,6 +1,6 @@
+import { VideosComponent } from './../../videos.component';
 import { Video } from './../../model/video';
 import { Component, OnInit, Input } from '@angular/core';
-import * as kf from '../../../../keyframes';
 
 @Component({
   selector: 'app-video',
@@ -10,7 +10,9 @@ import * as kf from '../../../../keyframes';
 export class VideoComponent implements OnInit {
   @Input() video: Video;
 
-  constructor() {}
-
+  constructor(public vd: VideosComponent) {}
+  ended() {
+    this.vd.nextVideo();
+  }
   ngOnInit(): void {}
 }

@@ -45,6 +45,7 @@ export class VideosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.startAnimation;
     /**
      * Fetch all videos and subscribe to it
      */
@@ -87,10 +88,12 @@ export class VideosComponent implements OnInit {
   }
 
   /**
-   * fetch the next video
+   * Determine the index of the next video
    */
 
   nextVideo() {
+    // this.startAnimation('slideOutUp');
+
     if (this.currentIndex < this.videosLength - 1) {
       this.currentIndex++;
     } else {
@@ -99,23 +102,53 @@ export class VideosComponent implements OnInit {
   }
 
   /**
-   * fetch the previous video
+   * Determine the index of the previous video
    */
 
   previousVideo() {
+    // this.startAnimation('slideOutDown');
+
     if (this.currentIndex > 0) {
-      this.currentIndex++;
+      this.currentIndex--;
     } else {
       this.currentIndex = this.videosLength - 1;
     }
   }
 
+  /**
+   * change the video to the next video
+   */
+
   swipeUp() {
     this.store.dispatch(new SWIPE.SwipeUp());
   }
 
+  /**
+   * change the video to the previous video
+   */
+
   swipeDown() {
     this.store.dispatch(new SWIPE.SwipeDown());
+  }
+
+  /**
+   * Start the video swiping animation
+   * @params state
+   */
+
+  startAnimation(state) {
+    if (!this.animationState) {
+      this.animationState = state;
+    }
+  }
+
+  /**
+   * Reset the video animation after the animation is done
+   *
+   */
+
+  resetAnimationState() {
+    this.animationState = '';
   }
 
   /**
